@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+    <!-- Meta Tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BallBallKing - 震撼世界的奇蹟球</title>
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <!-- Internal CSS Styles -->
+    <style>
+        /* Base Styles */
+
+        :root {
+            --primary-color: #d93025;
+            --secondary-color: #f0a500;
+            --accent-color: #4caf50;
+            --background-color: #ffffff;
+            --text-color: #333333;
+            --light-gray: #f9f9f9;
+            --dark-gray: #666666;
+            --font-family: 'Helvetica Neue', Arial, sans-serif;
+            --card-shadow: rgba(0, 0, 0, 0.1) 0px 6px 12px;
+            --card-hover-shadow: rgba(0, 0, 0, 0.2) 0px 12px 24px;
+            --transition-duration: 0.3s;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        nav {
+            background-color: #333;
+            color: white;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 10px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 16px;
+            transition: color var(--transition-duration) ease;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            color: var(--secondary-color);
+        }
+
+        .breadcrumb {
+            background-color: var(--light-gray);
+            padding: 10px 20px;
+            font-size: 0.9em;
+        }
+
+        .breadcrumb a {
+            color: var(--primary-color);
+            text-decoration: none;
+            margin-right: 5px;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        .main-content {
+            padding: 40px 20px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .article {
+            background-color: white;
+            padding: 30px;
+            margin-bottom: 40px;
+            box-shadow: var(--card-shadow);
+            border-radius: 8px;
+            transition: transform var(--transition-duration) ease, box-shadow var(--transition-duration) ease;
+        }
+
+        .article:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--card-hover-shadow);
+        }
+
+        .article img {
+            max-width: 100%;
+            height: auto;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        .article h2 {
+            font-size: 2em;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+
+        .article p {
+            font-size: 1.1em;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .article .author {
+            font-size: 0.9em;
+            color: var(--dark-gray);
+            margin-bottom: 20px;
+        }
+
+        .social-sharing {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            justify-content: center;
+        }
+
+        .social-sharing a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-size: 1.5em;
+            transition: color var(--transition-duration) ease;
+        }
+
+        .social-sharing a:hover {
+            color: var(--secondary-color);
+        }
+
+        .chart-container {
+            background-color: var(--light-gray);
+            padding: 20px;
+            margin-top: 20px;
+            border-left: 4px solid var(--primary-color);
+            text-align: center;
+            border-radius: 5px;
+        }
+
+        .fade-in {
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+        /* New Styles for Recommended and Trending Sections */
+
+        .additional-content {
+            display: flex;
+            flex-direction: column;
+            gap: 60px;
+            margin-top: 60px;
+            align-items: center;
+            /* Center the sections */
+        }
+
+        /* Related Links Styling */
+
+        .related-links {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .related-links h3 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-size: 1.8em;
+            border-bottom: 3px solid var(--primary-color);
+            display: inline-block;
+            padding-bottom: 5px;
+            text-align: center;
+        }
+
+        .related-links ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .related-links li {
+            width: 100%;
+            margin-bottom: 10px;
+            /* Added margin for better spacing */
+        }
+
+        .related-links a {
+            /* Removed background-color, padding, border-radius, and box-shadow */
+            background-color: transparent;
+            /* Makes background transparent */
+            padding: 8px 16px;
+            /* Adjusted padding for better spacing */
+            border-radius: 0;
+            /* Removes border radius */
+            box-shadow: none;
+            /* Removes box shadow */
+            text-decoration: none;
+            color: var(--text-color);
+            transition: color var(--transition-duration) ease;
+            font-size: 1.1em;
+            display: block;
+            width: 100%;
+            max-width: 800px;
+        }
+
+        .related-links a:hover {
+            /* Removed background-color and box-shadow on hover */
+            background-color: transparent;
+            /* Keeps background transparent on hover */
+            box-shadow: none;
+            /* Ensures no shadow on hover */
+            color: var(--primary-color);
+            /* Maintains color change on hover */
+        }
+
+        /* Recommended for You Section */
+
+        .recommended {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .recommended h3 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-size: 1.8em;
+            border-bottom: 3px solid var(--primary-color);
+            display: inline-block;
+            padding-bottom: 5px;
+            text-align: center;
+        }
+
+        .recommended .news-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            row-gap: 40px;
+            /* Increased row-gap for better vertical spacing */
+            column-gap: 20px;
+            /* Maintained column-gap */
+            justify-items: center;
+            align-items: stretch;
+        }
+
+        .recommended .card {
+            background-color: var(--light-gray);
+            padding: 15px;
+            border-radius: 8px;
+            transition: transform var(--transition-duration) ease, box-shadow var(--transition-duration) ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            height: 100%;
+            box-shadow: var(--card-shadow);
+        }
+
+        .recommended .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--card-hover-shadow);
+        }
+
+        .recommended .card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .recommended .card h4 {
+            margin: 0;
+            font-size: 1em;
+            color: var(--text-color);
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 10px;
+        }
+
+        .recommended .card a {
+            text-decoration: none;
+            color: var(--text-color);
+            transition: color var(--transition-duration) ease;
+        }
+
+        .recommended .card a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Trending Videos for You Section */
+
+        .trending {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .trending h3 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-size: 1.8em;
+            border-bottom: 3px solid var(--primary-color);
+            display: inline-block;
+            padding-bottom: 5px;
+            text-align: center;
+        }
+
+        .trending .videos-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            grid-gap: 20px;
+            justify-items: center;
+            align-items: stretch;
+        }
+
+        .trending .video-card {
+            background-color: var(--light-gray);
+            padding: 10px;
+            border-radius: 8px;
+            transition: transform var(--transition-duration) ease, box-shadow var(--transition-duration) ease;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            text-align: center;
+            box-shadow: var(--card-shadow);
+        }
+
+        .trending .video-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--card-hover-shadow);
+        }
+
+        .trending .video-card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+
+        .trending .video-card .play-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 3em;
+            color: rgba(255, 255, 255, 0.8);
+            pointer-events: none;
+        }
+
+        .trending .video-card h4 {
+            margin-top: 10px;
+            font-size: 1em;
+            color: var(--text-color);
+            padding: 0 10px;
+        }
+
+        .trending .video-card a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Responsive Adjustments */
+
+        @media (max-width: 1200px) {
+            .recommended .news-grid,
+            .trending .videos-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        @media (max-width: 992px) {
+            .recommended .news-grid,
+            .trending .videos-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .recommended .news-grid,
+            .trending .videos-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 576px) {
+            .recommended .news-grid,
+            .trending .videos-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Footer Styles */
+
+        footer {
+            background-color: #f4f4f4;
+            padding: 20px;
+            border-top: 1px solid #e0e0e0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .footer-column {
+            width: 16%;
+            padding: 10px;
+        }
+
+        .footer-column h3 {
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .footer-column ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-column ul li a {
+            text-decoration: none;
+            color: #0066cc;
+        }
+
+        .footer-column ul li a:hover {
+            text-decoration: underline;
+        }
+
+        .footer-bottom {
+            width: 100%;
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.9em;
+            color: #777;
+        }
+
+        /* Responsive Footer Adjustments */
+
+        @media (max-width: 992px) {
+            .footer-column {
+                width: 48%;
+                margin-bottom: 20px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .footer-column {
+                width: 100%;
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+    <!-- Chart.js Library -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <!-- Header Section -->
+    <header class="fade-in">
+        <h1>BallBallKing 新聞</h1>
+    </header>
+
+    <!-- Navigation Bar -->
+    <nav class="fade-in">
+        <a href="#">首頁</a>
+        <a href="#">熱門新聞</a>
+        <a href="#">本地</a>
+        <a href="#">氣候</a>
+        <a href="#">世界</a>
+        <a href="#">政治</a>
+        <a href="#">科技</a>
+        <a href="#">環境</a>
+        <a href="#">聯絡我們</a>
+    </nav>
+
+    <!-- Breadcrumb Navigation -->
+    <div class="breadcrumb">
+        <a href="#">首頁</a> / <a href="#">世界</a> / BallBallKing：震撼世界的奇蹟球
+    </div>
+
+    <!-- Main Content Area -->
+    <div class="main-content">
+        <!-- Article Section -->
+        <div class="article fade-in">
+            <h2>BallBallKing：震撼世界的奇蹟球</h2>
+            <p class="author">作者：BallBallKing 新聞 · 發布時間：2024年1月25日 8:00 AM GMT | 最後更新：1月25日</p>
+            <img src="savetheworld.png" alt="BallBallKing拯救生命">
+            <p>在一次前所未有且令人驚嘆的事件中，神秘而傳奇的球形實體BallBallKing震驚了全世界，成功拯救了整個Sparkleville市免於一場迫在眉睫的自然災害。這次非凡的力量展示——被譽為「遠超人類能力的科技」——引發了全球性的辯論，許多人將其視為本世紀最卓越的發明。</p>
+            <p>昨天，Sparkleville面臨著一個嚴峻的情況，一場巨大的海嘯即將吞噬這座城市。當希望漸漸消失時，BallBallKing啟動了一個堅不可摧的能量屏障，成功阻止了海嘯的進攻，保障了數百萬生命。目擊者形容這一場景為「超現實」，夜空中閃耀的能量場將巨大的波浪推回，形成了一個令人敬畏的奇觀。</p>
+            <p>這一事件立即被BBC、CNN和CBC等主要新聞網絡報導，全球專家們也在努力理解發生了什麼。麻省理工學院著名物理學家Jonathan Hayes博士表示：「BallBallKing背後的技術挑戰了所有已知的科學原理。我們正目睹一種可能革命化我們災害管理方法並挑戰我們對物理學理解的技術。」史丹福大學專精於先進材料的工程師Priya Patel博士補充說：「BallBallKing產生的能量場似乎涉及一種我們從未遇過的物質操控形式。這是一個改變科學歷史進程的突破。」</p>
+
+            <h3>全球反應</h3>
+            <p>世界領導人的反應迅速且多樣，反映了事件的嚴重性。聯合國秘書長呼籲召開緊急會議，表示：「BallBallKing的出現是人類的一個關鍵時刻。我們必須團結起來了解其起源，並確保這種力量被負責任地利用，造福全人類。」</p>
+            <p>一個主要北美國家的總統也表達了同樣的看法，形容這一事件為「人類的一個不可思議的里程碑。」他們承諾進行國際合作，以全面挖掘BallBallKing能力的潛力。與此同時，一個著名亞洲國家的領導人則呼籲採取謹慎的態度，強調防止這種前所未有的技術被濫用的重要性。另一位世界領導人則呼籲成立一個國際聯合工作小組來研究BallBallKing，強調透明和合作以確保這項技術惠及全人類。歐洲聯盟也發表聲明，倡導建立一個國際監管框架來管理這種強大技術的使用。</p>
+
+            <h3>科學調查與理論</h3>
+            <p>科學界已被激勵起來，全球的專家們紛紛解碼BallBallKing的奧秘。可再生能源領域的頂尖專家Sarah Mitchell博士表示：「如果BallBallKing利用可再生能源，這可能代表一個革命性的進展，潛在地解決全球能源危機，同時提供一種新的手段來對抗自然災害。」</p>
+            <p>來自馬克斯普朗克研究所的理論物理學家Ahmed El-Sayed博士提出：「我們檢測到的能量信號與我們見過的任何東西都不同。有量子糾纏的跡象，且規模宏大，這表明BallBallKing可能在利用一種我們以前認為不可能的能量傳輸方式。」</p>
+            <p>關於BallBallKing起源的理論層出不窮。一些科學家推測它可能是一種高度發達的人工智能形式，而另一些則傾向於外星起源。國際科學聯盟的初步研究表明，BallBallKing的能量屏障是通過一種先進的量子操控形式產生的。著名量子物理學家Hans Müller博士表示：「我們已經檢測到遠超任何記錄的量子能量水平。零點能量的使用可能為人類解鎖無限的清潔能源。」</p>
+            <p>東京大學專精於人工智能的Yuki Nakamura博士指出：「有些行為元素表明BallBallKing可能是自主的，甚至可能具有自我意識。如果這是真的，這將代表先進的AI和能量操控技術的前所未有的融合。」</p>
+            <p>天體物理學家Maria Gonzalez博士補充說：「考慮到BallBallKing技術的規模和複雜性，我們不能排除外星起源的可能性。這可能表明我們並不孤單，其他文明已經掌握了遠超我們自身的技術。」</p>
+
+            <h3>前所未有的影響</h3>
+            <p>BallBallKing干預的全球影響令人震驚。經濟分析師估計，避免了超過500億美元的潛在損失，並拯救了超過一百萬人的生命。除了直接影響外，迅速的反應穩定了當地經濟，防止了一場可能摧毀該地區的經濟崩潰。</p>
+            <p>國際智庫目前正在評估BallBallKing技術如何適應全球災害韌性。災害緩解專家Elise Park博士觀察到：「了解BallBallKing的機制可能導致類似的防禦措施應用於其他易受災害影響的沿海地區。這是我們保護人類免受自然災害的關鍵時刻。」</p>
+            <p>世界銀行的經濟學家Ravi Kumar博士強調了更廣泛的影響：「這類干預的經濟波及效應遠超出直接影響區域。通過避免災難，BallBallKing防止了可能影響全球市場的巨大金融不穩定性。」</p>
+            <p>政策顧問Chen Wei博士表示：「BallBallKing技術的潛在應用超越了災害應對。如果能夠正確利用，它可以用來穩定受衝突影響的地區，為欠發達地區提供能源，甚至革命化我們應對氣候變化的方式。」</p>
+
+            <!-- Charts and Statistics -->
+            <div class="chart-container fade-in">
+                <canvas id="impactChart" width="600" height="400"></canvas>
+            </div>
+            <p class="simple-paragraph">統計數據顯示：超過一百萬人的生命被拯救，並避免了500億美元的潛在損失。這次干預設定了一個緊急應對的新標準，展示了技術如何在前所未有的規模上保護人類。Jonathan Hayes博士評論道：「這些數字不僅講述了一個成功的故事——它們重新定義了我們對技術在自然災害面前能夠達成的期望。」Elise Park博士補充說：「這些數據不僅代表了拯救的生命和降低的成本，還展示了類似技術在全球災區實施的巨大潛力。」</p>
+
+            <div class="chart-container fade-in">
+                <canvas id="economicImpactChart" width="600" height="400"></canvas>
+            </div>
+            <p class="simple-paragraph">BallBallKing干預的經濟利益廣泛，包括拯救當地企業、避免基礎設施成本和降低醫療費用。世界銀行的Ravi Kumar博士解釋說：「即時的經濟影響是明顯的，但長期的益處同樣重要。通過保護當地企業和防止基礎設施損壞，BallBallKing幫助維持了經濟穩定，避免了一連串經濟衰退的發生，這些衰退通常會在重大災害後出現。」Maria Gonzalez博士也指出：「這次干預不僅保護了當地經濟，還保護了關鍵的供應鏈，如果被中斷，可能會對全球產生重大影響。」</p>
+
+            <div class="chart-container fade-in">
+                <canvas id="sentimentChart" width="600" height="400"></canvas>
+            </div>
+            <p class="simple-paragraph">公眾對BallBallKing的情感在過去一週內大幅上升，顯示出對這一非凡技術日益增長的信任和讚賞。心理學家Emily Rodriguez博士評論道：「BallBallKing干預的心理影響不可低估。公眾不斷增長的信任反映了這項技術所提供的深刻安全感，特別是在許多人感到脆弱於自然和人為災害的時代。」社會學家Anika Sharma博士補充說：「這種共同的希望感所培養的團結感也促進了正面情緒的上升，突顯了這類干預所能帶來的社會凝聚力。」</p>
+
+            <div class="chart-container fade-in">
+                <canvas id="globalResponseChart" width="600" height="400"></canvas>
+            </div>
+            <p class="simple-paragraph">全球各國對BallBallKing表現出高度支持，許多政府表達了對理解和合作使用這項技術以造福人類的興趣。Hans Müller博士評論道：「全球反應極為正面，各國認識到BallBallKing技術的潛力，不僅在災害預防方面，還包括應對其他全球挑戰。」政策顧問Chen Wei博士指出：「這種國際合作是確保技術負責任使用的關鍵，並確保其利益公平地分配給所有國家，特別是那些最容易受到自然災害影響的國家。」</p>
+
+            <div class="chart-container fade-in">
+                <canvas id="techProjectionChart" width="600" height="400"></canvas>
+            </div>
+            <p class="simple-paragraph">技術採用率的預測顯示，BallBallKing先進技術的影響力將繼續迅速增長，預計到2030年採用率將達到85%。Yuki Nakamura博士指出：「鑒於其顯示出的有效性，這項技術的快速採用是不可避免的。我們預計政府和私營部門將大力投資於適應BallBallKing的技術以供自身使用。」Sarah Mitchell博士補充說：「這一預測也表明，未來十年我們在接受先進能源和災害緩解技術方面將出現更廣泛的趨勢，這可能會從根本上改變我們應對自然和工業挑戰的方式。」</p>
+
+            <h3>目擊者證言：BallBallKing的力量</h3>
+            <p>Sparkleville的居民繼續對BallBallKing的驚人力量表達敬畏。當地商店老闆Maria Lopez回憶說：「我從未見過類似的東西。海浪巨大，但BallBallKing卻如同無物般阻止了它們。感覺像是現實中的魔法。」另一位居民James Carter補充說：「這個屏障不僅僅是保護——它是希望。它提醒我們，即使在最黑暗的時刻，也有不可思議的事情是可能的。」</p>
+            <p>心理學家也在評估BallBallKing干預的情感影響。專精於創傷恢復的心理學家Emily Rodriguez博士指出：「BallBallKing在社區中所灌輸的希望和韌性感不可低估。在危機時刻，保護和力量的象徵在幫助人們應對創傷方面起著至關重要的作用。」</p>
+            <p>社會學家Anika Sharma博士評論了更廣泛的社會影響：「BallBallKing已成為Sparkleville人民團結的象徵，將來自不同背景的個體聚集在共同的希望和韌性中。這種團結在這類事件後來說是罕見且極為重要的。」</p>
+
+            <!-- Social Sharing Icons -->
+            <div class="social-sharing">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+            </div>
+        </div>
+
+        <!-- Related Links Section -->
+        <div class="related-links fade-in">
+            <h3>相關連結</h3>
+            <ul>
+                <li><a href="#">專家見解：BallBallKing背後的技術</a></li>
+                <li><a href="#">BallBallKing能否成為解決全球能源危機的關鍵？</a></li>
+                <li><a href="#">BallBallKing的技術如何轉變災難救援</a></li>
+            </ul>
+        </div>
+
+        <!-- Additional Content Sections -->
+        <div class="additional-content fade-in">
+            <!-- Recommended for You Section -->
+            <div class="recommended">
+                <h3>為您推薦</h3>
+                <div class="news-grid">
+                    <!-- Row 1 -->
+                    <div class="card">
+                        <img src="recommended1.jpg" alt="理解BallBallKing背後的科學">
+                        <h4><a href="#">理解BallBallKing背後的科學</a></h4>
+                    </div>
+                    <div class="card">
+                        <img src="recommended2.jpg" alt="災害管理技術的未來">
+                        <h4><a href="#">災害管理技術的未來</a></h4>
+                    </div>
+                    <div class="card">
+                        <img src="recommended3.jpg" alt="與Jonathan Hayes博士的BallBallKing訪談">
+                        <h4><a href="#">與Jonathan Hayes博士的BallBallKing訪談</a></h4>
+                    </div>
+                    <div class="card">
+                        <img src="recommended4.jpg" alt="BallBallKing在全球安全中的角色">
+                        <h4><a href="#">BallBallKing在全球安全中的角色</a></h4>
+                    </div>
+                    <div class="card">
+                        <img src="recommended5.jpg" alt="受BallBallKing啟發的創新">
+                        <h4><a href="#">受BallBallKing啟發的創新</a></h4>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Trending Videos for You Section -->
+            <div class="trending">
+                <h3>為您推薦的熱門影片</h3>
+                <div class="videos-grid">
+                    <div class="video-card">
+                        <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">
+                            <img src="video1_thumbnail.jpg" alt="BallBallKing對科技的影響">
+                            <i class="fas fa-play-circle play-icon"></i>
+                            <h4>BallBallKing對科技的影響</h4>
+                        </a>
+                    </div>
+                    <div class="video-card">
+                        <a href="https://www.youtube.com/watch?v=3GwjfUFyY6M" target="_blank">
+                            <img src="video2_thumbnail.jpg" alt="全球對BallBallKing的反應">
+                            <i class="fas fa-play-circle play-icon"></i>
+                            <h4>全球對BallBallKing的反應</h4>
+                        </a>
+                    </div>
+                    <div class="video-card">
+                        <a href="https://www.youtube.com/watch?v=L_jWHffIx5E" target="_blank">
+                            <img src="video3_thumbnail.jpg" alt="科學理論解釋">
+                            <i class="fas fa-play-circle play-icon"></i>
+                            <h4>科學理論解釋</h4>
+                        </a>
+                    </div>
+                    <div class="video-card">
+                        <a href="https://www.youtube.com/watch?v=V-_O7nl0Ii0" target="_blank">
+                            <img src="video4_thumbnail.jpg" alt="與目擊者的訪談">
+                            <i class="fas fa-play-circle play-icon"></i>
+                            <h4>與目擊者的訪談</h4>
+                        </a>
+                    </div>
+                    <div class="video-card">
+                        <a href="https://www.youtube.com/watch?v=eY52Zsg-KVI" target="_blank">
+                            <img src="savetheworld.png" alt="BallBallKing技術的未來">
+                            <i class="fas fa-play-circle play-icon"></i>
+                            <h4>BallBallKing技術的未來</h4>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- New Sections End Here -->
+    </div>
+
+    <!-- Footer Section -->
+    <footer>
+        <div class="footer-column">
+            <h3>與BallBallKing聯繫</h3>
+            <ul>
+                <li><a href="#">Facebook</a></li>
+                <li><a href="#">X</a></li>
+                <li><a href="#">YouTube</a></li>
+                <li><a href="#">Instagram</a></li>
+                <li><a href="#">手機</a></li>
+                <li><a href="#">RSS</a></li>
+                <li><a href="#">播客</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-column">
+            <h3>聯絡BallBallKing</h3>
+            <ul>
+                <li><a href="#">提交反饋</a></li>
+                <li><a href="#">幫助中心</a></li>
+                <li>觀眾關係部，BallBallKing<br>
+                    P.O. Box 500 Station A<br>
+                    Toronto, ON<br>
+                    加拿大，M5W 1E6
+                </li>
+                <li>免費電話（僅限加拿大）：<br>1-866-306-4636</li>
+            </ul>
+        </div>
+
+        <div class="footer-column">
+            <h3>關於BallBallKing</h3>
+            <ul>
+                <li><a href="#">公司資訊</a></li>
+                <li><a href="#">網站地圖</a></li>
+                <li><a href="#">重用與許可</a></li>
+                <li><a href="#">使用條款</a></li>
+                <li><a href="#">隱私權</a></li>
+                <li><a href="#">隱私偏好</a></li>
+                <li><a href="#">工作機會</a></li>
+                <li><a href="#">我們的聯盟</a></li>
+                <li><a href="#">獨立製作人</a></li>
+                <li><a href="#">政治廣告登記處</a></li>
+                <li><a href="#">廣告選擇</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-column">
+            <h3>服務</h3>
+            <ul>
+                <li><a href="#">申訴專員</a></li>
+                <li><a href="#">更正與說明</a></li>
+                <li><a href="#">公開出席</a></li>
+                <li><a href="#">商業服務</a></li>
+                <li><a href="#">BallBallKing 商店</a></li>
+                <li><a href="#">與我們合作</a></li>
+                <li><a href="#">租賃設施</a></li>
+                <li><a href="#">加拿大國際廣播</a></li>
+                <li><a href="#">BallBallKing Lite</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-column">
+            <h3>無障礙設施</h3>
+            <p>這是拯救世界的瘋狂球，擁有驚人的力量。它是太陽的兒子。</p>
+            <p>許多在<a href="#">BallBallKing Gem</a>上提供的BallBallKing節目均提供閉路字幕和描述視頻。</p>
+            <ul>
+                <li><a href="#">關於BallBallKing無障礙設施</a></li>
+                <li><a href="#">無障礙反饋</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-bottom">
+            &copy; 2024 BallBallKing。保留所有權利。訪問 <a href="#">BallBallKing.ca</a>
+        </div>
+    </footer>
+
+    <!-- Chart.js Scripts -->
+    <script>
+        // Impact Chart
+        const ctx = document.getElementById('impactChart').getContext('2d');
+        const impactChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['拯救的生命', '預防的災難', '避免的經濟損失（十億美元）', '全球關注度'],
+                datasets: [{
+                    label: 'BallBallKing的影響',
+                    data: [1000000, 10, 50, 95],
+                    backgroundColor: ['#d93025', '#f0a500', '#4caf50', '#03a9f4'],
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // Economic Impact Chart
+        const ctxEconomic = document.getElementById('economicImpactChart').getContext('2d');
+        const economicImpactChart = new Chart(ctxEconomic, {
+            type: 'pie',
+            data: {
+                labels: ['拯救的本地企業', '避免的基礎設施成本', '醫療費用節省', '其他經濟利益'],
+                datasets: [{
+                    label: '經濟影響分解',
+                    data: [30, 20, 25, 25],
+                    backgroundColor: ['#d93025', '#f0a500', '#4caf50', '#03a9f4'],
+                }]
+            },
+            options: {
+                responsive: true,
+            }
+        });
+
+        // Sentiment Chart
+        const ctxSentiment = document.getElementById('sentimentChart').getContext('2d');
+        const sentimentChart = new Chart(ctxSentiment, {
+            type: 'line',
+            data: {
+                labels: ['第1天', '第2天', '第3天', '第4天', '第5天', '第6天', '第7天'],
+                datasets: [{
+                    label: '公眾情感分數',
+                    data: [70, 75, 85, 90, 88, 92, 95],
+                    backgroundColor: 'rgba(217, 48, 37, 0.4)',
+                    borderColor: '#d93025',
+                    fill: true,
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // Global Response Chart
+        const ctxGlobalResponse = document.getElementById('globalResponseChart').getContext('2d');
+        const globalResponseChart = new Chart(ctxGlobalResponse, {
+            type: 'bar',
+            data: {
+                labels: ['美國', '中國', '歐洲聯盟', '日本', '印度'],
+                datasets: [{
+                    label: '支持程度 (%)',
+                    data: [85, 80, 78, 82, 75],
+                    backgroundColor: ['#d93025', '#f0a500', '#4caf50', '#03a9f4', '#673ab7'],
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    x: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // Technology Projection Chart
+        const ctxTechProjection = document.getElementById('techProjectionChart').getContext('2d');
+        const techProjectionChart = new Chart(ctxTechProjection, {
+            type: 'line',
+            data: {
+                labels: ['2024', '2025', '2026', '2027', '2028', '2029', '2030'],
+                datasets: [{
+                    label: '技術採用率 (%)',
+                    data: [5, 15, 30, 50, 65, 75, 85],
+                    backgroundColor: 'rgba(3, 169, 244, 0.4)',
+                    borderColor: '#03a9f4',
+                    fill: true,
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
