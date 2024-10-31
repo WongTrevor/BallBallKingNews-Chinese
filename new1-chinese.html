@@ -24,6 +24,7 @@
             --card-shadow: rgba(0, 0, 0, 0.1) 0px 6px 12px;
             --card-hover-shadow: rgba(0, 0, 0, 0.2) 0px 12px 24px;
             --transition-duration: 0.3s;
+            --heading-font-size: 1.2em;
         }
 
         body {
@@ -41,13 +42,16 @@
             padding: 20px;
             text-align: center;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: relative;
         }
 
+        /* Navigation Bar Styles */
         nav {
             background-color: #333;
             color: white;
             display: flex;
             justify-content: center;
+            align-items: center;
             gap: 20px;
             padding: 10px 0;
             position: sticky;
@@ -59,12 +63,39 @@
             color: white;
             text-decoration: none;
             padding: 8px 16px;
-            transition: color var(--transition-duration) ease;
+            transition: color var(--transition-duration) ease, background-color var(--transition-duration) ease;
             font-weight: bold;
+            border-radius: 4px;
         }
 
         nav a:hover {
-            color: var(--secondary-color);
+            color: var(--background-color);
+            background-color: var(--secondary-color);
+        }
+
+        /* Language Switch Button Styles in Navigation */
+        .language-button {
+            background-color: transparent;
+            border: 2px solid white;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            transition: background-color var(--transition-duration) ease, color var(--transition-duration) ease, border-color var(--transition-duration) ease;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin-left: 20px;
+        }
+
+        .language-button:hover {
+            background-color: white;
+            color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+        .language-button i {
+            font-size: 1em;
         }
 
         .breadcrumb {
@@ -177,7 +208,6 @@
             gap: 60px;
             margin-top: 60px;
             align-items: center;
-            /* Center the sections */
         }
 
         /* Related Links Styling */
@@ -188,6 +218,7 @@
             margin: 0 auto;
             text-align: center;
             margin-bottom: 40px;
+            position: relative;
         }
 
         .related-links h3 {
@@ -212,36 +243,28 @@
         .related-links li {
             width: 100%;
             margin-bottom: 10px;
-            /* Added margin for better spacing */
+            text-align: left;
+            max-width: 800px;
+            padding-left: 20px;
         }
 
         .related-links a {
-            /* Removed background-color, padding, border-radius, and box-shadow */
             background-color: transparent;
-            /* Makes background transparent */
             padding: 8px 16px;
-            /* Adjusted padding for better spacing */
             border-radius: 0;
-            /* Removes border radius */
             box-shadow: none;
-            /* Removes box shadow */
             text-decoration: none;
             color: var(--text-color);
             transition: color var(--transition-duration) ease;
             font-size: 1.1em;
             display: block;
             width: 100%;
-            max-width: 800px;
         }
 
         .related-links a:hover {
-            /* Removed background-color and box-shadow on hover */
             background-color: transparent;
-            /* Keeps background transparent on hover */
             box-shadow: none;
-            /* Ensures no shadow on hover */
             color: var(--primary-color);
-            /* Maintains color change on hover */
         }
 
         /* Recommended for You Section */
@@ -265,11 +288,9 @@
 
         .recommended .news-grid {
             display: grid;
-            grid-template-columns: repeat(5, 1fr);
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             row-gap: 40px;
-            /* Increased row-gap for better vertical spacing */
             column-gap: 20px;
-            /* Maintained column-gap */
             justify-items: center;
             align-items: stretch;
         }
@@ -302,7 +323,7 @@
 
         .recommended .card h4 {
             margin: 0;
-            font-size: 1em;
+            font-size: var(--heading-font-size);
             color: var(--text-color);
             flex-grow: 1;
             display: flex;
@@ -342,12 +363,12 @@
 
         .trending .videos-grid {
             display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            grid-gap: 20px;
-            justify-items: center;
-            align-items: stretch;
+            grid-template-columns: repeat(5, 1fr); /* Ensure there are 5 equal columns */
+            gap: 20px; /* Keep consistent spacing between items */
+            justify-items: center; /* Center the items within each grid cell */
+            align-items: stretch; /* Make sure all items have the same height */
         }
-
+        
         .trending .video-card {
             background-color: var(--light-gray);
             padding: 10px;
@@ -358,7 +379,14 @@
             cursor: pointer;
             text-align: center;
             box-shadow: var(--card-shadow);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 300px; /* Fixed height for consistency */
+            width: 100%; /* Ensure the card takes up full width of the column */
         }
+        
+        
 
         .trending .video-card:hover {
             transform: translateY(-5px);
@@ -367,14 +395,14 @@
 
         .trending .video-card img {
             width: 100%;
-            height: 150px;
+            height: 180px;
             object-fit: cover;
             border-radius: 5px;
         }
 
         .trending .video-card .play-icon {
             position: absolute;
-            top: 50%;
+            top: calc(10px + 90px);
             left: 50%;
             transform: translate(-50%, -50%);
             font-size: 3em;
@@ -384,14 +412,28 @@
 
         .trending .video-card h4 {
             margin-top: 10px;
-            font-size: 1em;
+            font-size: var(--heading-font-size);
             color: var(--text-color);
             padding: 0 10px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            text-align: center;
         }
 
         .trending .video-card a {
             text-decoration: none;
             color: inherit;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         /* Responsive Adjustments */
@@ -399,21 +441,37 @@
         @media (max-width: 1200px) {
             .recommended .news-grid,
             .trending .videos-grid {
-                grid-template-columns: repeat(4, 1fr);
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             }
         }
 
         @media (max-width: 992px) {
             .recommended .news-grid,
             .trending .videos-grid {
-                grid-template-columns: repeat(3, 1fr);
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            }
+
+            nav {
+                flex-wrap: wrap;
+            }
+
+            .language-button {
+                margin-left: 10px;
+            }
+
+            .related-links ul {
+                padding-left: 0;
+            }
+
+            .related-links li {
+                padding-left: 0;
             }
         }
 
         @media (max-width: 768px) {
             .recommended .news-grid,
             .trending .videos-grid {
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
             }
         }
 
@@ -509,6 +567,10 @@
         <a href="#">科技</a>
         <a href="#">環境</a>
         <a href="#">聯絡我們</a>
+        <!-- 語言切換按鈕 -->
+        <a href="https://wongtrevor.github.io/BallBallKingNews-English-/news1.html" class="language-button">
+            <i class="fas fa-globe"></i> English
+        </a>
     </nav>
 
     <!-- Breadcrumb Navigation -->
@@ -523,7 +585,7 @@
             <h2>BallBallKing：震撼世界的奇蹟球</h2>
             <p class="author">作者：BallBallKing 新聞 · 發布時間：2024年1月25日 8:00 AM GMT | 最後更新：1月25日</p>
             <img src="savetheworld.png" alt="BallBallKing拯救生命">
-            <p>在一次前所未有且令人驚嘆的事件中，神秘而傳奇的球形實體BallBallKing震驚了全世界，成功拯救了整個Sparkleville市免於一場迫在眉睫的自然災害。這次非凡的力量展示——被譽為「遠超人類能力的科技」——引發了全球性的辯論，許多人將其視為本世紀最卓越的發明。</p>
+            <p>在一次前所未有且令人驚嘆的事件中，神秘而傳奇的球形實體BallBallKing震撼了全世界，成功拯救了整個Sparkleville市免於一場迫在眉睫的自然災害。這次非凡的力量展示——被譽為「遠超人類能力的科技」——引發了全球性的辯論，許多人將其視為本世紀最卓越的發明。</p>
             <p>昨天，Sparkleville面臨著一個嚴峻的情況，一場巨大的海嘯即將吞噬這座城市。當希望漸漸消失時，BallBallKing啟動了一個堅不可摧的能量屏障，成功阻止了海嘯的進攻，保障了數百萬生命。目擊者形容這一場景為「超現實」，夜空中閃耀的能量場將巨大的波浪推回，形成了一個令人敬畏的奇觀。</p>
             <p>這一事件立即被BBC、CNN和CBC等主要新聞網絡報導，全球專家們也在努力理解發生了什麼。麻省理工學院著名物理學家Jonathan Hayes博士表示：「BallBallKing背後的技術挑戰了所有已知的科學原理。我們正目睹一種可能革命化我們災害管理方法並挑戰我們對物理學理解的技術。」史丹福大學專精於先進材料的工程師Priya Patel博士補充說：「BallBallKing產生的能量場似乎涉及一種我們從未遇過的物質操控形式。這是一個改變科學歷史進程的突破。」</p>
 
@@ -539,7 +601,7 @@
             <p>天體物理學家Maria Gonzalez博士補充說：「考慮到BallBallKing技術的規模和複雜性，我們不能排除外星起源的可能性。這可能表明我們並不孤單，其他文明已經掌握了遠超我們自身的技術。」</p>
 
             <h3>前所未有的影響</h3>
-            <p>BallBallKing干預的全球影響令人震驚。經濟分析師估計，避免了超過500億美元的潛在損失，並拯救了超過一百萬人的生命。除了直接影響外，迅速的反應穩定了當地經濟，防止了一場可能摧毀該地區的經濟崩潰。</p>
+            <p>BallBallKing干預的全球影響令人震撼。經濟分析師估計，避免了超過500億美元的潛在損失，並拯救了超過一百萬人的生命。除了直接影響外，迅速的反應穩定了當地經濟，防止了一場可能摧毀該地區的經濟崩潰。</p>
             <p>國際智庫目前正在評估BallBallKing技術如何適應全球災害韌性。災害緩解專家Elise Park博士觀察到：「了解BallBallKing的機制可能導致類似的防禦措施應用於其他易受災害影響的沿海地區。這是我們保護人類免受自然災害的關鍵時刻。」</p>
             <p>世界銀行的經濟學家Ravi Kumar博士強調了更廣泛的影響：「這類干預的經濟波及效應遠超出直接影響區域。通過避免災難，BallBallKing防止了可能影響全球市場的巨大金融不穩定性。」</p>
             <p>政策顧問Chen Wei博士表示：「BallBallKing技術的潛在應用超越了災害應對。如果能夠正確利用，它可以用來穩定受衝突影響的地區，為欠發達地區提供能源，甚至革命化我們應對氣候變化的方式。」</p>
@@ -665,7 +727,7 @@
                 </div>
             </div>
         </div>
-        <!-- New Sections End Here -->
+        <!-- Additional Content Sections End Here -->
     </div>
 
     <!-- Footer Section -->
@@ -860,3 +922,4 @@
 </body>
 
 </html>
+
